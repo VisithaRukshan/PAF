@@ -1,4 +1,4 @@
-package com.fantasticfour.healthcare.payment;
+package com.fantasticfour.healthCareApi.payment;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

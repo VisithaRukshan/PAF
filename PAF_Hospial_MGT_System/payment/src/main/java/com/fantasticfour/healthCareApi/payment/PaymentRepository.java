@@ -1,4 +1,4 @@
-package com.fantasticfour.healthcare.payment;
+package com.fantasticfour.healthCareApi.payment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ public class PaymentRepository {
 	public PaymentRepository() {
 		
 		//DB Connection
-		String url = "jdbc:mysql://localhost:3306/healthCareApiProject"; //DB Name eka dgnin mcn. Tables name : payment, card
+		String url = "jdbc:mysql://localhost:3306/payment"; //DB Name eka dgnin mcn. Tables name : payment, card
 		String username = "root";
 		String password = "";
 		
