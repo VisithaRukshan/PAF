@@ -1,4 +1,4 @@
-package com.fantasticfour.healthCareApi.payment;
+package model;
 
 public class Payment {
 	public int payID;  //me name tikama denna DB eke fields tikata
