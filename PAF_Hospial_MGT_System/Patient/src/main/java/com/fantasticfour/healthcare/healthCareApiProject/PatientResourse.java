@@ -11,6 +11,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import model.Appointment;
+import model.Doctor;
+import model.Hospital;
+import model.Patient;
+import repository.PatientRepository;
+
 @Path("patients")
 public class PatientResourse {
 	PatientRepository repo = new PatientRepository();
@@ -23,16 +29,8 @@ public class PatientResourse {
 		return repo.getAllPatients();
 
 	}
-	/*@GET
-	@Path("login/{username}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Patient loginCheck(@PathParam("username") String username) {
-		
-		return repo.logincheck(username);
-	}*/
-		
 
-	// get paticular patient
+	// get particular patient
 	@GET
 	@Path("patient/{pnic}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,7 +77,45 @@ public class PatientResourse {
 			repo.delete(pnic);
 		}
 		return p;
+	}
 
+	// hospital view
+	@GET
+	@Path("hospital")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Hospital> getHospitals() {
+		System.out.println("getHospital called..");
+		return repo.getHospitals();
+	}
+
+	// doctor view
+	@GET
+	@Path("doctor")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Doctor> getAllDoctors() {
+
+		System.out.println("All Doctors called......");
+		return repo.getAllDoctors();
+	}
+
+	// place appointment
+	@POST
+	@Path("appointment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Appointment createAppointment(Appointment A1) {
+		System.out.println(A1);
+		repo.create(A1);
+		return A1;
+	}
+
+	// Retrieve paticular appointment
+	@GET
+	@Path("appointment/{appointNo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Appointment getAppointment(@PathParam("appointNo") int appointNo) {
+
+		System.out.println("Appointment No:" + appointNo);
+		return repo.getAppointment(appointNo);
 	}
 
 }

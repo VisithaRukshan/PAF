@@ -1,4 +1,4 @@
-package com.fantasticfour.healthcare.healthCareApiProject;
+package repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Appointment;
+import model.Doctor;
+import model.Hospital;
+import model.Patient;
+
 import java.sql.*;
 import java.sql.Statement;
 
@@ -15,7 +20,6 @@ public class PatientRepository {
 	Connection con = null;
 
 	public PatientRepository() {
-
 		String url = "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String username = "root";
 		String password = "";
@@ -25,7 +29,6 @@ public class PatientRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public List<Patient> getAllPatients() {
@@ -89,7 +92,7 @@ public class PatientRepository {
 			st.setString(5, p.getUsername());
 			st.setString(6, p.getPassword());
 			st.executeUpdate();
-			System.out.println(" "+ p.getPname() + " created successfully");
+			System.out.println(" " + p.getPname() + " created successfully");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -111,8 +114,8 @@ public class PatientRepository {
 			st.setString(5, p.getPassword());
 			st.setInt(6, p.getPnic());
 			st.executeUpdate();
-			
-			System.out.println(""+ p.getPname() + "details updated successfully" );
+
+			System.out.println("" + p.getPname() + "details updated successfully");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -130,8 +133,81 @@ public class PatientRepository {
 
 			st.setInt(1, pnic);
 			st.executeUpdate();
-			
+
 			System.out.println("" + pnic + "Patient profile deleted successfully");
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	// hospital view
+	public List<Hospital> getHospitals() {
+		List<Hospital> hospitals = new ArrayList<>();
+		String sql = "select * from hospital";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Hospital h = new Hospital();
+				h.setHostId(rs.getInt(1));
+
+				h.setTeleNo(rs.getString(2));
+				h.setName(rs.getString(3));
+				h.setLocation(rs.getString(4));
+				hospitals.add(h);
+			}
+			System.out.println("Hospital retrive successfully");
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return hospitals;
+	}
+
+	// get Doctor view
+	public List<Doctor> getAllDoctors() {
+
+		List<Doctor> doctors = new ArrayList<>();
+		String sql = "select * from doctors";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Doctor d = new Doctor();
+				d.setDocID(rs.getInt(1));
+				d.setName(rs.getString(2));
+				d.setSpecialization(rs.getString(3));
+				d.setContactNo(rs.getString(4));
+
+				doctors.add(d);
+			}
+			System.out.println("Doctor retrive successfully");
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return doctors;
+	}
+
+	// make appoinment
+	public void create(Appointment a) {
+		String query = "Insert into appoinment values (?,?,?,?,?,?)";
+		try {
+			PreparedStatement st = con.prepareStatement(query);
+			st.setInt(1, a.getAppointNo());
+			st.setString(2, a.getPname());
+			st.setString(3, a.getDname());
+			st.setString(4, a.getDate());
+			st.setString(5, a.getTime());
+			st.setString(6, a.getLocation());
+			st.executeUpdate();
+
+			System.out.println("Appointment id  " + a.getAppointNo() + " place Appointment successfully");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,28 +215,28 @@ public class PatientRepository {
 
 	}
 
-/*	public Patient logincheck(String username) {
-		String query = "Select * from ptable where username =" + username;
-		Patient p = new Patient();
+	// retrive Apppointment
+
+	public Appointment getAppointment(int appointNo) {
+		String sql = "select * from appoinment where appointNo=" + appointNo;
+		Appointment a = new Appointment();
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(query);
+			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 
-				p.setPnic(rs.getInt(1));
-				p.setPname(rs.getString(2));
-				p.setGender(rs.getString(3));
-				p.setPhonenumber(rs.getString(4));
-				p.setUsername(rs.getString(5));
-				p.setPassword(rs.getString(6));
+				a.setAppointNo(rs.getInt(1));
+				a.setPname(rs.getString(2));
+				a.setDname(rs.getString(3));
+				a.setDate(rs.getString(4));
+				a.setTime(rs.getString(5));
+				a.setLocation(rs.getString(6));
 
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		return p;
-		
-	}*/
+		return a;
+	}
 
 }
