@@ -37,9 +37,11 @@ public class AppointmentRepositary {
 		{
 			Appointment a = new Appointment();
 			a.setAppointNo(rs.getInt(1));
-			a.setDate(rs.getString(2));
-			a.setTime(rs.getString(3));
-			a.setLocation(rs.getString(4));
+			a.setPatName(rs.getString(2));
+			a.setdName(rs.getString(3));
+			a.setDate(rs.getString(4));
+			a.setTime(rs.getString(5));
+			a.setLocation(rs.getString(6));
 			
 			appointments.add(a);
 		}
@@ -64,9 +66,11 @@ public class AppointmentRepositary {
 		{
 		
 			a.setAppointNo(rs.getInt(1));
-			a.setDate(rs.getString(2));
-			a.setTime(rs.getString(3));
-			a.setLocation(rs.getString(4));
+			a.setPatName(rs.getString(2));
+			a.setdName(rs.getString(3));
+			a.setDate(rs.getString(4));
+			a.setTime(rs.getString(5));
+			a.setLocation(rs.getString(6));
 			
 			
 		}
@@ -81,14 +85,16 @@ public class AppointmentRepositary {
 	
 
 	public void create(Appointment A1) {
-		String sql = "insert into appointment values(?,?,?,?)";
+		String sql = "insert into appointment values(?,?,?,?,?,?)";
 		try
 		{
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setInt(1,  A1.getAppointNo());
-		st.setString(2,  A1.getDate());
-		st.setString(3, A1.getTime());
-		st.setString(4, A1.getLocation());
+		st.setString(2, A1.getPatName());
+		st.setString(3, A1.getdName());
+		st.setString(4,  A1.getDate());
+		st.setString(5, A1.getTime());
+		st.setString(6, A1.getLocation());
 		st.executeUpdate();
 	
 		
@@ -102,15 +108,17 @@ public class AppointmentRepositary {
 		}
 		
 	public void update(Appointment A1) {
-		String sql = "update appointment set date=?, time=?, location=? where appointNo=? ";
+		String sql = "update appointment set patName=?, dName=?, date=?, time=?, location=? where appointNo=? ";
 		try
 		{
 		PreparedStatement st = con.prepareStatement(sql);
 		
-		st.setString(1,  A1.getDate());
-		st.setString(2, A1.getTime());
-		st.setString(3, A1.getLocation());
-		st.setInt(4,  A1.getAppointNo());
+		st.setString(1, A1.getPatName());
+		st.setString(2, A1.getdName());
+		st.setString(3,  A1.getDate());
+		st.setString(4, A1.getTime());
+		st.setString(5, A1.getLocation());
+		st.setInt(6,  A1.getAppointNo());
 		st.executeUpdate();
 	
 		
@@ -141,8 +149,3 @@ public class AppointmentRepositary {
 		}
 	}
 }
-		
-
-
-	
-
