@@ -12,6 +12,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import model.Appointment;
+import model.Doctor;
+import repository.DoctorRepository;
+
 @Path("doctors")
 public class DoctorResource {
 
@@ -43,15 +47,15 @@ public class DoctorResource {
 	
 	
 	
-	/*@GET  //Retrieve
-	@Path("view/{docID}")
+	@GET  //RetrieveAppo
+	@Path("viewappo/{appointNo}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Appointment getAppointment(@PathParam("appo_No") int appo_No){
+	public Appointment getAppointment(@PathParam("appointNo") int appointNo){
 		
-		System.out.println("Appointment ID : "+appo_No);
-		return repo.getAppointment(appo_No);
+		System.out.println("Appointment : "+appointNo);
+		return repo.getAppointment(appointNo);
 		
-	}*/
+	}
 	
 	
 	

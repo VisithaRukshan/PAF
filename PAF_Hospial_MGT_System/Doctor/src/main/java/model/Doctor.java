@@ -1,8 +1,8 @@
-package com.fantasticfour.healthcare.healthCareApiProject;
+package model;
 
 public class Doctor {
 	public int docID;
-	public String name;
+	public String docName;
 	public String specialization;
 	public String contactNo;
 	public String password;
@@ -13,11 +13,11 @@ public class Doctor {
 	public void setDocID(int docID) {
 		this.docID = docID;
 	}
-	public String getName() {
-		return name;
+	public String getDocName() {
+		return docName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setDocName(String docName) {
+		this.docName = docName;
 	}
 	public String getSpecialization() {
 		return specialization;
@@ -40,9 +40,11 @@ public class Doctor {
 	
 	@Override
 	public String toString() {
-		return "Doctor [docID=" + docID + ", name=" + name + ", specialization=" + specialization + ", contactNo="
+		return "Doctor [docID=" + docID + ", docName=" + docName + ", specialization=" + specialization + ", contactNo="
 				+ contactNo + ", password=" + password + "]";
 	}
+	
+	
 	
 	
 	

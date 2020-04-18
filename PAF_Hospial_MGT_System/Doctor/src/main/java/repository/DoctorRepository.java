@@ -1,7 +1,11 @@
-package com.fantasticfour.healthcare.healthCareApiProject;
+package repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Appointment;
+import model.Doctor;
+
 import java.sql.*;
 
 public class DoctorRepository {
@@ -26,6 +30,7 @@ public class DoctorRepository {
 	}
 	
 	
+	
 	//ViewDoctors
 	public List<Doctor> getAllDoctors(){
 		
@@ -37,7 +42,7 @@ public class DoctorRepository {
 			while(rs.next()) {
 				Doctor d = new Doctor();
 				d.setDocID(rs.getInt(1));
-				d.setName(rs.getString(2));
+				d.setDocName(rs.getString(2));
 				d.setSpecialization(rs.getString(3));
 				d.setContactNo(rs.getString(4));
 				
@@ -52,6 +57,7 @@ public class DoctorRepository {
 	}
 	
 	
+	
 	//ViewDoctor
 	public Doctor getDoctor(int docID) {
 		
@@ -63,7 +69,7 @@ public class DoctorRepository {
 			if(rs.next()) {
 				
 				d.setDocID(rs.getInt(1));
-				d.setName(rs.getString(2));
+				d.setDocName(rs.getString(2));
 				d.setSpecialization(rs.getString(3));
 				d.setContactNo(rs.getString(4));
 				
@@ -79,28 +85,30 @@ public class DoctorRepository {
 	
 	
 	//ViewAppointment
-	/*public Appointment getAppointment(int appo_No) {
-		
-		String sql = "select * from appointment where appo_No = "+appo_No;
+	public Appointment getAppointment(int appointNo) {
+			
+		String sql = "select * from appointment where appointNo = "+appointNo;
 		Appointment a = new Appointment();
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			if(rs.next()) {
-				
-				a.setAppo_No(rs.getInt(1));
-				a.setLocation(rs.getString(2));
-				a.setTime(rs.getString(3));
+					
+				a.setAppointNo(rs.getInt(1));
+				a.setPname(rs.getString(2));
+				a.setdName(rs.getString(3));
 				a.setDate(rs.getString(4));
-				
+				a.setTime(rs.getString(5));
+				a.setLocation(rs.getString(6));
+					
 			}
-			
+				
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+			
 		return a;
-	}*/	
+	}	
 	
 
 	
@@ -111,7 +119,7 @@ public class DoctorRepository {
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setInt(1, d1.getDocID());
-			pst.setString(2, d1.getName());
+			pst.setString(2, d1.getDocName());
 			pst.setString(3, d1.getSpecialization());
 			pst.setString(4, d1.getContactNo());
 			pst.executeUpdate();
@@ -147,10 +155,10 @@ public class DoctorRepository {
 	//UpdateDoctor
 	public void update(Doctor d1) {
 		
-		String sql = "update doctors set name=?, specialization=?, contactNo=? where docID=?";
+		String sql = "update doctors set docName=?, specialization=?, contactNo=? where docID=?";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setString(1, d1.getName());
+			pst.setString(1, d1.getDocName());
 			pst.setString(2, d1.getSpecialization());
 			pst.setString(3, d1.getContactNo());
 			pst.setInt(4, d1.getDocID());
@@ -199,8 +207,6 @@ public class DoctorRepository {
 			
 		}
 	
-	
-	
-	
+		
 	
 }
