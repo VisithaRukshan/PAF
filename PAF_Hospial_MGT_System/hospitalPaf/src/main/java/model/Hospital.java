@@ -1,4 +1,4 @@
-package hospitalPaf.hospitalPaf;
+package model;
 
 
 public class Hospital {

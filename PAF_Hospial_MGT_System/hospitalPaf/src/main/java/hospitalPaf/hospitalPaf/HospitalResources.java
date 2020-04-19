@@ -13,6 +13,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import model.Hospital;
+import repository.HospitalRepository;
+
 
 @Path("/hospitals")
 public class HospitalResources
@@ -31,7 +34,7 @@ public class HospitalResources
 
 	
 	@GET
-	@Path("hospital/{id}")
+	@Path("get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Hospital getHospital(@PathParam("id") int id)
 	{
@@ -40,7 +43,7 @@ public class HospitalResources
 	
 //post method called	
 	@POST
-	@Path("/hospital")
+	@Path("/insert")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Hospital createHospital(Hospital h1)
 	{
@@ -52,7 +55,7 @@ public class HospitalResources
 	
 //put method called	
 	@PUT
-	@Path("/hospital")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Hospital updateHospital(Hospital h1)
 	{
@@ -70,7 +73,7 @@ public class HospitalResources
 	
 //delete method called	
 	@DELETE
-	@Path("hospital/{id}")
+	@Path("delete/{id}")
 	public Hospital deleteHospital(@PathParam("id") int id)
 	{
 		
