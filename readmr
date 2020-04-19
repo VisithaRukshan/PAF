@@ -6,35 +6,20 @@ Group ID: Group S1011.5
 
 Doctor Management service
 
-   POST
-   GET
-   PUT
-   DELETE
+   http://localhost:8080/Doctor/
 
 Patient Management service
 
-   POST
-   GET
-   PUT
-   DELETE
+   http://localhost:8080/Patient/
 
 Appointment Management service
   
-   POST
-   GET
-   PUT
-   DELETE
+   http://localhost:8080/HealthCareAppointment/
 
 Hospital Management service
 
-   POST
-   GET
-   PUT
-   DELETE
+   http://localhost:8080/hospitalPaf/
 
 Payment Management service
 
-   POST
-   GET
-   PUT
-   DELETE
+  http://localhost:8080/payment/
