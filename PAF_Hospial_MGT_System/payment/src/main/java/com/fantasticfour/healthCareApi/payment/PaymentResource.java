@@ -1,5 +1,8 @@
 package com.fantasticfour.healthCareApi.payment;
 
+
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -9,6 +12,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import model.Payment;
+import repository.PaymentRepository;
 
 @Path("payment")
 public class PaymentResource {
@@ -26,6 +32,12 @@ public class PaymentResource {
 		
 	}
 	
+	@GET  //view all
+	@Path("viewall")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Payment> getAllPayment(){
+		return repo.getAllPayment();
+	}
 	
 	
 	@POST  //Insert
@@ -48,14 +60,10 @@ public class PaymentResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Payment updatePayment(Payment p1) {
 		
-		if(repo.getPayment(p1.getPayID()).getPayID()==0) { //if data is not create new data
-			repo.create(p1); 
-			System.out.println("Succesfully created new member..."+p1);
-			
-		}else { //else update data
+		
 			repo.update(p1);
 			System.out.println("Succesfully Updated..."+p1);
-		}
+		
 		
 		return p1;
 	}
@@ -70,7 +78,6 @@ public class PaymentResource {
 		Payment p = repo.getPayment(payID);
 		if(p.getPayID()!=0) {
 			repo.delete(payID);
-			repo.deleteCard(payID);
 			System.out.println("Succesfully Deleted..."+p); 
 		}
 		return p;
