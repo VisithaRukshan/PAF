@@ -45,7 +45,7 @@ public class PaymentRepository {
 			if(rs.next()) {
 				
 				p.setPayID(rs.getInt(1));
-				p.setPid(rs.getString(2));
+				p.setApno(rs.getString(2));
 				p.setPname(rs.getString(3));
 				p.setDname(rs.getString(4));
 				p.setLocation(rs.getString(5));
@@ -73,7 +73,7 @@ public class PaymentRepository {
 			while(rs.next()) {
 				Payment p = new Payment();
 				p.setPayID(rs.getInt(1));
-				p.setPid(rs.getString(2));
+				p.setApno(rs.getString(2));
 				p.setPname(rs.getString(3));
 				p.setDname(rs.getString(4));
 				p.setLocation(rs.getString(5));
@@ -100,9 +100,9 @@ public class PaymentRepository {
 		String dname = null;
 		String location = null;
 		
-		System.out.println(p1.getPid());
 		
-		String sql1 = "select * from appointment where pid ="+p1.getPid();
+		
+		String sql1 = "select * from appointment where apno ="+p1.getApno();
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql1);
@@ -125,7 +125,7 @@ public class PaymentRepository {
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setInt(1, p1.getPayID());
-			pst.setString(2, p1.getPid());
+			pst.setString(2, p1.getApno());
 			pst.setString(3, pname);
 			pst.setString(4, dname);
 			pst.setString(5, location);
@@ -146,10 +146,28 @@ public class PaymentRepository {
 	//InsertCard
 	public void createCard(Payment p1) {
 		
+		String pname = null;
+		
+		String sql1 = "select * from payment where apno ="+p1.getApno();
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql1);
+			
+			while (rs.next()) {
+				pname = rs.getString("pname"); 
+				
+				System.out.println(pname);
+			}
+			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		String sql = "insert into card values (?,?,?)";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setString(1, p1.getPid());
+			pst.setString(1, pname);
 			pst.setString(2, p1.getCardNo());
 			pst.setString(3, p1.getCvv());
 			pst.executeUpdate();
@@ -166,12 +184,12 @@ public class PaymentRepository {
 	//CardUpdate
 	public void update(Payment p1) {
 		
-		String sql = "update card set cardNo=?, cvv=? where pid=?";
+		String sql = "update card set cardNo=?, cvv=? where pname=?";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, p1.getCardNo());
 			pst.setString(2, p1.getCvv());
-			pst.setString(3, p1.getPid());
+			pst.setString(3, p1.getPname());
 			pst.executeUpdate();
 			
 			

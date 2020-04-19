@@ -2,7 +2,7 @@ package model;
 
 public class Payment {
 	public int payID;  
-	public String pid;
+	public String apno;
 	public String pname;
 	public String dname;
 	public String location;
@@ -12,17 +12,18 @@ public class Payment {
 	public String cardNo;
 	public String cvv;
 	
+	
 	public int getPayID() {
 		return payID;
 	}
 	public void setPayID(int payID) {
 		this.payID = payID;
 	}
-	public String getPid() {
-		return pid;
+	public String getApno() {
+		return apno;
 	}
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setApno(String apno) {
+		this.apno = apno;
 	}
 	public String getPname() {
 		return pname;
@@ -72,5 +73,7 @@ public class Payment {
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
+	
+	
 	
 }
