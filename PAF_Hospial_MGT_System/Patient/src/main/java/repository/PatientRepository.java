@@ -95,7 +95,7 @@ public class PatientRepository {
 			st.setString(5, p.getUsername());
 			st.setString(6, p.getPassword());
 			st.executeUpdate();
-			System.out.println(" " + p.getPname() + " created successfully");
+			System.out.println(" " + p.getPname() + "  created successfully");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -118,7 +118,7 @@ public class PatientRepository {
 			st.setInt(6, p.getPnic());
 			st.executeUpdate();
 
-			System.out.println("" + p.getPname() + "details updated successfully");
+			System.out.println(" " + p.getPname() + " details updated successfully");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -138,7 +138,7 @@ public class PatientRepository {
 			st.setInt(1, pnic);
 			st.executeUpdate();
 
-			System.out.println("" + pnic + "Patient profile deleted successfully");
+			System.out.println("" + pnic + " Patient profile deleted successfully");
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -224,6 +224,7 @@ public class PatientRepository {
 
 	public Appointment getAppointment(int appointNo) {
 		String sql = "select * from appoinment where appointNo=" + appointNo;
+		String output = "";
 		//String sql = "select * from appointment where appointNo=" + appointNo;
 		Appointment a = new Appointment();
 		try {
@@ -239,6 +240,8 @@ public class PatientRepository {
 				a.setLocation(rs.getString(6));
 
 			}
+			
+			System.out.println("Appointment id " + appointNo + " Details Retrived  Succeccfully ");
 		} catch (Exception e) {
 			System.out.println(e);
 		}

@@ -14,7 +14,7 @@ public class SecurityFilter implements ContainerRequestFilter{
 
 	private static final String AUTHORIZATION_HEADER_KEY = "Authorization";
 	private static final String AUTHORIZATION_HEADER_PREFIX = "Basic ";
-	private static final String SECURED_URL_PREFIX = "patients";
+	private static final String SECURED_URL_PREFIX = "update";
 	
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -33,7 +33,7 @@ public class SecurityFilter implements ContainerRequestFilter{
 				String username = tokenizer.nextToken();
 				String password = tokenizer.nextToken();
 			
-				if("dhanuka".equals(username) && "dhanuka@123".equals(password)) {
+				if("dhanuka".equals(username) && "dhanuka@12".equals(password)) {
 					return;
 				}
 			
