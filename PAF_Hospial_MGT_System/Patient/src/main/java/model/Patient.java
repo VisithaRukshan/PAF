@@ -1,4 +1,4 @@
-package com.fantasticfour.healthcare.healthCareApiProject;
+package model;
 
 public class Patient {
 
