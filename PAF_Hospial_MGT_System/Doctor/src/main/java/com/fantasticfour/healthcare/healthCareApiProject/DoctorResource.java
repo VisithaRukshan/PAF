@@ -60,7 +60,7 @@ public class DoctorResource {
 	
 	
 	@POST  //Insert
-	@Path("add")
+	@Path("insert")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Doctor createDoctor(Doctor d1) {
 		
