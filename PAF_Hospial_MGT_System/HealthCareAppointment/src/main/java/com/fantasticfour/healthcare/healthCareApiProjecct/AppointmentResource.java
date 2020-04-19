@@ -32,7 +32,7 @@ public class AppointmentResource {
 	}
 	
 	@GET
-	@Path("get/{appointNo}")
+	@Path("view/{appointNo}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Appointment getAppointment(@PathParam("appointNo") int appointNo)
 	{
