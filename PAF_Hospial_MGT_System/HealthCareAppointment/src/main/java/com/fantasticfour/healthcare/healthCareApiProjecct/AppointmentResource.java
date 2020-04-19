@@ -13,6 +13,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import model.Appointment;
+import repository.AppointmentRepositary;
+
 
 @Path("/appointments")
 public class AppointmentResource {
@@ -29,7 +32,7 @@ public class AppointmentResource {
 	}
 	
 	@GET
-	@Path("appointment/{appointNo}")
+	@Path("get/{appointNo}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Appointment getAppointment(@PathParam("appointNo") int appointNo)
 	{
@@ -38,7 +41,7 @@ public class AppointmentResource {
 		return repo.getAppointment(appointNo);
 	}
 	@POST
-	@Path("/appointment")
+	@Path("/insert")
 	@Consumes(MediaType.APPLICATION_JSON)
 		public Appointment createAppointment(Appointment A1) 
 		{
@@ -48,7 +51,7 @@ public class AppointmentResource {
 		return A1;
 	}
 	@PUT
-	@Path("/appointment")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 		public Appointment updateAppointment(Appointment A1) 
 		{
@@ -64,7 +67,7 @@ public class AppointmentResource {
 		return A1;
 	}
 	@DELETE
-	@Path("appointment/{appointNo}")
+	@Path("delete/{appointNo}")
 	public Appointment deleteAppointment(@PathParam("appointNo") int appointNo)
 		{
 			Appointment A1 = repo.getAppointment(appointNo);

@@ -1,4 +1,4 @@
-package com.fantasticfour.healthcare.healthCareApiProjecct;
+package model;
 
 public class Appointment {
 

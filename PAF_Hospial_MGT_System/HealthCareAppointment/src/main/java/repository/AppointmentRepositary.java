@@ -1,7 +1,10 @@
-package com.fantasticfour.healthcare.healthCareApiProjecct;
+package repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Appointment;
+
 import java.sql.*;
 
 public class AppointmentRepositary {
@@ -85,16 +88,16 @@ public class AppointmentRepositary {
 	
 
 	public void create(Appointment A1) {
-		String sql = "insert into appointment values(?,?,?,?,?,?)";
+		String sql = "insert into appointment (patName, dName, date, time, location) values(?,?,?,?,?)";
 		try
 		{
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1,  A1.getAppointNo());
-		st.setString(2, A1.getPatName());
-		st.setString(3, A1.getdName());
-		st.setString(4,  A1.getDate());
-		st.setString(5, A1.getTime());
-		st.setString(6, A1.getLocation());
+		//st.setInt(1,  A1.getAppointNo());
+		st.setString(1, A1.getPatName());
+		st.setString(2, A1.getdName());
+		st.setString(3,  A1.getDate());
+		st.setString(4, A1.getTime());
+		st.setString(5, A1.getLocation());
 		st.executeUpdate();
 	
 		
