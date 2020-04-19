@@ -34,7 +34,7 @@ public class HospitalResources
 
 	
 	@GET
-	@Path("get/{id}")
+	@Path("view/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Hospital getHospital(@PathParam("id") int id)
 	{
