@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Payment;
 
@@ -15,7 +18,7 @@ public class PaymentRepository {
 	public PaymentRepository() {
 		
 		//DB Connection
-		String url = "jdbc:mysql://localhost:3306/payment"; //DB Name eka dgnin mcn. Tables name : payment, card
+		String url = "jdbc:mysql://localhost:3306/payment"; 
 		String username = "root";
 		String password = "";
 		
@@ -42,9 +45,13 @@ public class PaymentRepository {
 			if(rs.next()) {
 				
 				p.setPayID(rs.getInt(1));
-				p.setDate(rs.getString(2));
-				p.setTime(rs.getString(3));
-				p.setAmount(rs.getString(4));
+				p.setPid(rs.getString(2));
+				p.setPname(rs.getString(3));
+				p.setDname(rs.getString(4));
+				p.setLocation(rs.getString(5));
+				p.setDate(rs.getString(6));
+				p.setTime(rs.getString(7));
+				p.setAmount(rs.getString(8));
 				
 			}
 			
@@ -55,18 +62,76 @@ public class PaymentRepository {
 		return p;
 	}
 	
+	//View all
+	
+	public List<Payment> getAllPayment(){
+		List<Payment> payments = new ArrayList<>();
+		String sql = "select * from payment";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
+				Payment p = new Payment();
+				p.setPayID(rs.getInt(1));
+				p.setPid(rs.getString(2));
+				p.setPname(rs.getString(3));
+				p.setDname(rs.getString(4));
+				p.setLocation(rs.getString(5));
+				p.setDate(rs.getString(6));
+				p.setTime(rs.getString(7));
+				p.setAmount(rs.getString(8));
+				
+				
+				payments.add(p);
+				
+			}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return payments;
+	}
 
 
 	//Insert
 	public void create(Payment p1) {
 		
-		String sql = "insert into payment values (?,?,?,?)";
+		String amount="1000.00";
+		String pname = null;
+		String dname = null;
+		String location = null;
+		
+		System.out.println(p1.getPid());
+		
+		String sql1 = "select * from appointment where pid ="+p1.getPid();
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql1);
+			
+			while (rs.next()) {
+				pname = rs.getString("name"); 
+				dname = rs.getString("dname");
+				location = rs.getString("location");
+				
+				System.out.println(pname + dname + location);
+			}
+			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		String sql = "insert into payment values (?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setInt(1, p1.getPayID());
-			pst.setString(2, p1.getDate());
-			pst.setString(3, p1.getTime());
-			pst.setString(4, p1.getAmount());
+			pst.setString(2, p1.getPid());
+			pst.setString(3, pname);
+			pst.setString(4, dname);
+			pst.setString(5, location);
+			pst.setString(6, p1.getDate());
+			pst.setString(7, p1.getTime());
+			pst.setString(8, amount);
 			pst.executeUpdate();
 			
 			
@@ -84,7 +149,7 @@ public class PaymentRepository {
 		String sql = "insert into card values (?,?,?)";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setInt(1, p1.getPayID());
+			pst.setString(1, p1.getPid());
 			pst.setString(2, p1.getCardNo());
 			pst.setString(3, p1.getCvv());
 			pst.executeUpdate();
@@ -98,16 +163,15 @@ public class PaymentRepository {
 	
 	
 	
-	//Update
+	//CardUpdate
 	public void update(Payment p1) {
 		
-		String sql = "update payment set date=?, time=?, amount=? where payID=?";
+		String sql = "update card set cardNo=?, cvv=? where pid=?";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setString(1, p1.getDate());
-			pst.setString(2, p1.getTime());
-			pst.setString(3, p1.getAmount());
-			pst.setInt(4, p1.getPayID());
+			pst.setString(1, p1.getCardNo());
+			pst.setString(2, p1.getCvv());
+			pst.setString(3, p1.getPid());
 			pst.executeUpdate();
 			
 			
@@ -138,12 +202,12 @@ public class PaymentRepository {
 	
 	
 	//Delete
-	public void deleteCard(int payID) {
+	public void deleteCard(int pid) {
 		
-		String sql = "delete from card where payID=?";
+		String sql = "delete from card where pid=?";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setInt(1, payID);
+			pst.setInt(1, pid);
 			pst.executeUpdate();
 			
 			

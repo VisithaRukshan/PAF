@@ -1,7 +1,11 @@
 package model;
 
 public class Payment {
-	public int payID;  //me name tikama denna DB eke fields tikata
+	public int payID;  
+	public String pid;
+	public String pname;
+	public String dname;
+	public String location;
 	public String date;
 	public String time;
 	public String amount;
@@ -13,6 +17,30 @@ public class Payment {
 	}
 	public void setPayID(int payID) {
 		this.payID = payID;
+	}
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public String getDname() {
+		return dname;
+	}
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	public String getDate() {
 		return date;
@@ -44,13 +72,5 @@ public class Payment {
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
-	
-	@Override
-	public String toString() {
-		return "Payment [payID=" + payID + ", date=" + date + ", time=" + time + ", amount=" + amount + ", cardNo="
-				+ cardNo + ", cvv=" + cvv + "]";
-	}
-	
-	
 	
 }
