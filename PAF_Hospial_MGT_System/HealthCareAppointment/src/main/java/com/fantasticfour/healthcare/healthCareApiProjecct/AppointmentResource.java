@@ -13,6 +13,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import model.Appointment;
+import repository.AppointmentRepositary;
+
 
 @Path("/appointments")
 public class AppointmentResource {

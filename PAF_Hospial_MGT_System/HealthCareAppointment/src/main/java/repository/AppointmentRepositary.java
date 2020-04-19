@@ -1,7 +1,10 @@
-package com.fantasticfour.healthcare.healthCareApiProjecct;
+package repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Appointment;
+
 import java.sql.*;
 
 public class AppointmentRepositary {
