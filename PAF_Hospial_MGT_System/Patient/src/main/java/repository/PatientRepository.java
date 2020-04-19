@@ -20,6 +20,7 @@ public class PatientRepository {
 	Connection con = null;
 
 	public PatientRepository() {
+		//String url = "jdbc:mysql://127.0.0.1:3306/healthcareapi?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String url = "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String username = "root";
 		String password = "";
@@ -33,6 +34,7 @@ public class PatientRepository {
 
 	public List<Patient> getAllPatients() {
 		List<Patient> patient = new ArrayList<>();
+		//String query = "Select * from patient";
 		String query = "Select * from ptable";
 		try {
 			Statement st = con.createStatement();
@@ -56,6 +58,7 @@ public class PatientRepository {
 
 	public Patient getPatient(int pnic) {
 		System.out.println(pnic);
+		//String query = "Select * from patient where pnic =" + pnic;
 		String query = "Select * from ptable where pnic =" + pnic;
 		Patient p = new Patient();
 		try {
@@ -71,7 +74,7 @@ public class PatientRepository {
 				p.setPassword(rs.getString(6));
 
 			}
-			System.out.println("Patient " + pnic + "get successfully");
+			System.out.println("Patient " + pnic + " get successfully");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,7 +106,7 @@ public class PatientRepository {
 
 	public void update(Patient p) {
 		String query = "Update ptable set name=?,gender=?,phonenumber=?,username=?,password=? where pnic=?";
-
+		//String query = "Update patient set name=?,gender=?,phonenumber=?,username=?,password=? where pnic=?";
 		try {
 			PreparedStatement st = con.prepareStatement(query);
 
@@ -123,10 +126,11 @@ public class PatientRepository {
 		}
 
 	}
-
+//delete patient
 	public void delete(int pnic) {
 		System.out.println(pnic);
 		String query = "Delete from ptable where pnic=?";
+		//String query = "Delete from patient where pnic=?";
 
 		try {
 			PreparedStatement st = con.prepareStatement(query);
@@ -196,6 +200,7 @@ public class PatientRepository {
 	// make appoinment
 	public void create(Appointment a) {
 		String query = "Insert into appoinment values (?,?,?,?,?,?)";
+		//String query = "Insert into appointment values (?,?,?,?,?,?)";
 		try {
 			PreparedStatement st = con.prepareStatement(query);
 			st.setInt(1, a.getAppointNo());
@@ -215,10 +220,11 @@ public class PatientRepository {
 
 	}
 
-	// retrive Apppointment
+	// Retrieve Appointment
 
 	public Appointment getAppointment(int appointNo) {
 		String sql = "select * from appoinment where appointNo=" + appointNo;
+		//String sql = "select * from appointment where appointNo=" + appointNo;
 		Appointment a = new Appointment();
 		try {
 			Statement st = con.createStatement();
@@ -238,5 +244,6 @@ public class PatientRepository {
 		}
 		return a;
 	}
-
+	
+	
 }
