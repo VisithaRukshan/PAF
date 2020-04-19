@@ -1,1 +1,40 @@
 
+Hospital Management System
+Group ID: Group S1011.5
+
+
+
+Doctor Management service
+
+   POST
+   GET
+   PUT
+   DELETE
+
+Patient Management service
+
+   POST
+   GET
+   PUT
+   DELETE
+
+Appointment Management service
+  
+   POST
+   GET
+   PUT
+   DELETE
+
+Hospital Management service
+
+   POST
+   GET
+   PUT
+   DELETE
+
+Payment Management service
+
+   POST
+   GET
+   PUT
+   DELETE
